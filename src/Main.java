@@ -7,11 +7,16 @@ import java.net.URLConnection;
 
 public class Main {
 
+    static UI ui = new UI();
+    static Main m = new Main();
+
     private String defaultURL = "https://twitch.tv/$c$";
 
+    public static String name = "0";
+
     public static void main(String[] args) throws IOException {
-        Main m = new Main();
-        System.out.println("Is online? " + m.getSource("egglyberts").contains("isLiveBroadcast"));
+        ui.ui();
+        System.out.println("Is online? " + m.getSource(m.name).contains("isLiveBroadcast"));
     }
 
     public String insertChannel(String url, String channel){
