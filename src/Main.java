@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 
 public class Main {
 
@@ -16,7 +17,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         ui.ui();
-        System.out.println("Is online? " + m.getSource(m.name).contains("isLiveBroadcast"));
+        //System.out.println("Is online? " + m.getSource(m.name).contains("isLiveBroadcast"));
     }
 
     public String insertChannel(String url, String channel){
@@ -31,7 +32,7 @@ public class Main {
     }
 
     private String toString(InputStream is) throws IOException{
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, "UTF-8"))){
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))){
             String inputLine;
             StringBuilder stringBuilder = new StringBuilder();
             while ((inputLine = bufferedReader.readLine()) !=null){
