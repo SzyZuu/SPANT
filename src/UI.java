@@ -30,7 +30,6 @@ public class UI extends JPanel implements ActionListener {
 
         //Frame setup
         JFrame f = new JFrame("SPaNT");
-        JPanel p = new JPanel();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(500, 500);
 
@@ -38,24 +37,15 @@ public class UI extends JPanel implements ActionListener {
         JMenuBar mb = new JMenuBar();
         JMenu mHelp = new JMenu("Help");
         mb.add(mHelp);
+        f.setJMenuBar(mb);
 
         //add footer
         JLabel footer = new JLabel("2023 SzyZu", SwingConstants.CENTER);
 
-        //add text field
-        tf = new JTextField();
-        PromptSupport.setPrompt("Enter channel name", tf);
-        PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.SHOW_PROMPT, tf);
-        PromptSupport.setFontStyle(Font.ITALIC, tf);
-        tf.setBounds(300, 400, 400, 400);
-        tf.addActionListener(this);
-
         //add content
-        f.getContentPane().add(BorderLayout.NORTH, mb);
-        f.getContentPane().add(BorderLayout.CENTER, p);
+        //f.getContentPane().add(BorderLayout.CENTER, p);
         f.getContentPane().add(BorderLayout.PAGE_END, footer);
         //p.add(mb);
-        p.add(tf);
         //f.add(p);
 
         //set visible
@@ -67,4 +57,28 @@ public class UI extends JPanel implements ActionListener {
         Main.name = text;
         System.out.println(text);
     }
+
+    private JPanel searchPane(){
+        JPanel p = new JPanel();
+
+        //add text field
+        tf = new JTextField();
+        PromptSupport.setPrompt("Enter channel name", tf);
+        PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.SHOW_PROMPT, tf);
+        PromptSupport.setFontStyle(Font.ITALIC, tf);
+        tf.setBounds(300, 400, 400, 400);
+        tf.addActionListener(this);
+
+        p.add(tf);
+
+        return p;
+    }
+
+    private JPanel mainPane(){
+        JPanel p = new JPanel();
+
+        return p;
+    }
+
+    //https://stackoverflow.com/questions/5077321/how-could-i-make-the-jframe-content-change-to-corresponding-click
 }
