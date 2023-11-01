@@ -4,9 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import org.jdesktop.swingx.prompt.PromptSupport;
 
-public class UI extends JPanel implements ActionListener {
+public class UI extends JPanel {
 
     protected JTextField tf;
+    JFrame f = new JFrame("SPaNT");
 
     public void ui(){
 
@@ -29,7 +30,6 @@ public class UI extends JPanel implements ActionListener {
         }
 
         //Frame setup
-        JFrame f = new JFrame("SPaNT");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(500, 500);
 
@@ -39,23 +39,13 @@ public class UI extends JPanel implements ActionListener {
         mb.add(mHelp);
         f.setJMenuBar(mb);
 
-        //add footer
-        JLabel footer = new JLabel("2023 SzyZu", SwingConstants.CENTER);
-
         //add content
-        //f.getContentPane().add(BorderLayout.CENTER, p);
-        f.getContentPane().add(BorderLayout.PAGE_END, footer);
+        f.getContentPane().add(BorderLayout.CENTER, searchPane());
         //p.add(mb);
         //f.add(p);
 
         //set visible
         f.setVisible(true);
-    }
-
-    public void actionPerformed(ActionEvent evt){
-        String text = tf.getText();
-        Main.name = text;
-        System.out.println(text);
     }
 
     private JPanel searchPane(){
@@ -66,8 +56,11 @@ public class UI extends JPanel implements ActionListener {
         PromptSupport.setPrompt("Enter channel name", tf);
         PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.SHOW_PROMPT, tf);
         PromptSupport.setFontStyle(Font.ITALIC, tf);
-        tf.setBounds(300, 400, 400, 400);
-        tf.addActionListener(this);
+        tf.addActionListener(new switchAction(mainPane()));
+
+        //add footer
+        JLabel footer = new JLabel("2023 SzyZu", SwingConstants.CENTER);
+        f.getContentPane().add(BorderLayout.PAGE_END, footer);
 
         p.add(tf);
 
@@ -77,8 +70,30 @@ public class UI extends JPanel implements ActionListener {
     private JPanel mainPane(){
         JPanel p = new JPanel();
 
+        //add footer
+        JLabel footer = new JLabel("2023 SzyZu", SwingConstants.CENTER);
+        f.getContentPane().add(BorderLayout.PAGE_END, footer);
+
         return p;
     }
 
-    //https://stackoverflow.com/questions/5077321/how-could-i-make-the-jframe-content-change-to-corresponding-click
+    public void changePanel(JPanel p){
+        f.getContentPane().removeAll();
+        f.getContentPane().add(p, BorderLayout.CENTER);
+        f.invalidate();
+        f.validate();
+        f.repaint();
+    }
+
+    private class switchAction implements ActionListener{
+        private JPanel panel;
+
+        private switchAction(JPanel p){
+            this.panel = p;
+        }
+
+        public void actionPerformed(ActionEvent e){
+            changePanel(panel);
+        }
+    }
 }
