@@ -15,7 +15,7 @@ public class Main {
 
     public static String name = "0";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ui.ui();
         //System.out.println("Is online? " + m.getSource(m.name).contains("isLiveBroadcast"));
     }

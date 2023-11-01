@@ -39,6 +39,10 @@ public class UI extends JPanel {
         mb.add(mHelp);
         f.setJMenuBar(mb);
 
+        //add footer
+        JLabel footer = new JLabel("2023 SzyZu", SwingConstants.CENTER);
+        f.getContentPane().add(BorderLayout.PAGE_END, footer);
+
         //add content
         f.getContentPane().add(BorderLayout.CENTER, searchPane());
         //p.add(mb);
@@ -58,10 +62,6 @@ public class UI extends JPanel {
         PromptSupport.setFontStyle(Font.ITALIC, tf);
         tf.addActionListener(new switchAction(mainPane()));
 
-        //add footer
-        JLabel footer = new JLabel("2023 SzyZu", SwingConstants.CENTER);
-        f.getContentPane().add(BorderLayout.PAGE_END, footer);
-
         p.add(tf);
 
         return p;
@@ -70,15 +70,14 @@ public class UI extends JPanel {
     private JPanel mainPane(){
         JPanel p = new JPanel();
 
-        //add footer
-        JLabel footer = new JLabel("2023 SzyZu", SwingConstants.CENTER);
-        f.getContentPane().add(BorderLayout.PAGE_END, footer);
-
         return p;
     }
 
     public void changePanel(JPanel p){
         f.getContentPane().removeAll();
+        //add footer
+        JLabel footer = new JLabel("2023 SzyZu", SwingConstants.CENTER);
+        f.getContentPane().add(BorderLayout.PAGE_END, footer);
         f.getContentPane().add(p, BorderLayout.CENTER);
         f.invalidate();
         f.validate();
