@@ -1,3 +1,5 @@
+package spant;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,22 +8,18 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
-public class Main {
-    static Main m = new Main();
-
+public class StreamCheck {
     private final String defaultURL = "https://twitch.tv/$c$";
 
     public static String name = "debitorlp";
 
-    public static void main(String[] args) throws IOException {
-        System.out.println("Is online? " + m.getSource(m.name).contains("isLiveBroadcast"));
-    }
+    //System.out.println("Is online? " + getSource(name).contains("isLiveBroadcast"))
 
     public String insertChannel(String url, String channel){
         return url.replace("$c$", channel);
     }
 
-    public String getSource(String targetChannel) throws IOException{
+    public String getSource(String targetChannel) throws IOException {
         URL url = new URL(insertChannel(defaultURL, targetChannel));
         URLConnection conn = url.openConnection();
 
