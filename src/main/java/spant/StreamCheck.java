@@ -34,4 +34,21 @@ public class StreamCheck {
             return stringBuilder.toString();
         }
     }
+
+    public boolean isOnline(String name) {
+        try {
+            return getSource(name).contains("isLiveBroadcast");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void checkStatus(String name) {
+        if(isOnline(name)){
+
+        }else{
+
+        }
+    }
 }
