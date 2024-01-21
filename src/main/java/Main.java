@@ -7,17 +7,14 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
 public class Main {
-
-    static UI ui = new UI();
     static Main m = new Main();
 
-    private String defaultURL = "https://twitch.tv/$c$";
+    private final String defaultURL = "https://twitch.tv/$c$";
 
-    public static String name = "0";
+    public static String name = "debitorlp";
 
-    public static void main(String[] args) {
-        ui.ui();
-        //System.out.println("Is online? " + m.getSource(m.name).contains("isLiveBroadcast"));
+    public static void main(String[] args) throws IOException {
+        System.out.println("Is online? " + m.getSource(m.name).contains("isLiveBroadcast"));
     }
 
     public String insertChannel(String url, String channel){
