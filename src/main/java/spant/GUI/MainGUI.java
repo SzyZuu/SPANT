@@ -36,8 +36,8 @@ public class MainGUI extends JPanel {
         JPanel buttonPanel = new JPanel();
         bottomPanel.add(buttonPanel);
 
-        JButton btnNewButton = new JButton("New button");
-        JButton btnNewButton_1 = new JButton("New button");
+        JButton btnNewButton = new JButton("Exit");
+        JButton btnNewButton_1 = new JButton("Submit");
 
         buttonPanel.add(btnNewButton);
         buttonPanel.add(btnNewButton_1);
