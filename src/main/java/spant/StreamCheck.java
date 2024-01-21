@@ -11,8 +11,6 @@ import java.nio.charset.StandardCharsets;
 public class StreamCheck {
     private final String defaultURL = "https://twitch.tv/$c$";
 
-    public static String name = "debitorlp";
-
     //System.out.println("Is online? " + getSource(name).contains("isLiveBroadcast"))
 
     public String insertChannel(String url, String channel){

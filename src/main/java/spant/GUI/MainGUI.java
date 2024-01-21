@@ -1,14 +1,18 @@
 package spant.GUI;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import spant.Main;
+import spant.StreamCheck;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class MainGUI extends JPanel {
+    Main main;
     JTextField textField;
-    public MainGUI(){
+    public MainGUI(Main m){
+        main = m;
         doGUI();
     }
     public void doGUI(){
@@ -36,10 +40,24 @@ public class MainGUI extends JPanel {
         JPanel buttonPanel = new JPanel();
         bottomPanel.add(buttonPanel);
 
-        JButton btnNewButton = new JButton("Exit");
-        JButton btnNewButton_1 = new JButton("Submit");
+        JButton exitButton = new JButton("Exit");
+        JButton submitButton = new JButton("Submit");
 
-        buttonPanel.add(btnNewButton);
-        buttonPanel.add(btnNewButton_1);
+        buttonPanel.add(exitButton);
+        buttonPanel.add(submitButton);
+
+        //add actionlisteners to buttons
+        exitButton.addActionListener(e -> exitButtonPressed());
+        submitButton.addActionListener(e -> submitButtonPressed());
+    }
+
+    public void exitButtonPressed(){
+        //exit
+        System.exit(0);
+    }
+
+    public void submitButtonPressed(){
+        //continue to checking etc
+        StreamCheck streamCheck = main.getStreamCheck();
     }
 }
