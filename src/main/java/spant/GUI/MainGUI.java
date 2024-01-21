@@ -18,7 +18,7 @@ public class MainGUI extends JPanel {
 
         JLabel spantLabel = new JLabel("SPANT");
         spantLabel.setForeground(new Color(192, 192, 192));
-        spantLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+        spantLabel.setFont(new Font("Tahoma", Font.BOLD, 40));
         spantLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(spantLabel);
 
