@@ -11,6 +11,7 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
 public class StreamCheck {
+    boolean isOnline = false;
     private final String defaultURL = "https://twitch.tv/$c$";
 
     //System.out.println("Is online? " + getSource(name).contains("isLiveBroadcast"))
@@ -37,35 +38,37 @@ public class StreamCheck {
         }
     }
 
-    public boolean isOnline(String name) {
+    public void onlineCheck(String name) {
         try {
-            return getSource(name).contains("isLiveBroadcast");
+            isOnline = getSource(name).contains("isLiveBroadcast");
         } catch (IOException e){
             e.printStackTrace();
         }
-        return false;
     }
 
     public void checkStatus(String name) {
-        if(isOnline(name)){
+        onlineCheck(name);
+        if(isOnline){
             do{
-                System.out.println("Waiting...");
-                if(!isOnline(name)){
+                onlineCheck(name);
+                //System.out.println("Waiting...");
+                System.out.println(isOnline);
+                if(!isOnline){
                     System.out.println("Streamer went offline, shutdown!");
                     try {
-                        shutdown(0);
+                        shutdown(1);
                     }catch (IOException e){
                         e.printStackTrace();
                     }
                 }
-            }while (isOnline(name));
+            }while (isOnline);
         }else {
             System.out.println("offline");
         }
     }
 
-    public static boolean shutdown(int time) throws IOException {
-        String shutdownCommand = null, t = time == 0 ? "now" : String.valueOf(time);
+    public void shutdown(int time) throws IOException {
+        String shutdownCommand = null, t = String.valueOf(time);
 
         if(SystemUtils.IS_OS_AIX)
             shutdownCommand = "shutdown -Fh " + t;
@@ -79,10 +82,9 @@ public class StreamCheck {
             shutdownCommand = "shutdown -y -i5 -g" + t;
         else if(SystemUtils.IS_OS_WINDOWS)
             shutdownCommand = "shutdown.exe /s /t " + t;
-        else
-            return false;
 
+        System.out.println(shutdownCommand);
+        System.out.println("Shutting down NOW");
         Runtime.getRuntime().exec(shutdownCommand);
-        return true;
     }
 }
