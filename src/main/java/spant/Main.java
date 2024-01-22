@@ -13,6 +13,7 @@ public class Main {
     SpantGUI spantGUI;
     StreamCheck streamCheck;
     public Main() {
+        streamCheck = new StreamCheck();
         mainGUI = new MainGUI(this);
         spantGUI = new SpantGUI();
         window = new JFrame();

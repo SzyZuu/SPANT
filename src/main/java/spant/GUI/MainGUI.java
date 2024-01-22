@@ -59,5 +59,6 @@ public class MainGUI extends JPanel {
     public void submitButtonPressed(){
         //continue to checking etc
         StreamCheck streamCheck = main.getStreamCheck();
+        streamCheck.checkStatus(textField.getText());
     }
 }
