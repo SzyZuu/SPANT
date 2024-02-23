@@ -13,8 +13,13 @@ import java.nio.charset.StandardCharsets;
 public class StreamCheck {
     boolean isOnline = false;
     private final String defaultURL = "https://twitch.tv/$c$";
+    Main main;
 
     //System.out.println("Is online? " + getSource(name).contains("isLiveBroadcast"))
+
+    public StreamCheck(Main main){
+        this.main = main;
+    }
 
     public String insertChannel(String url, String channel){
         return url.replace("$c$", channel);
@@ -46,8 +51,7 @@ public class StreamCheck {
         }
     }
 
-    public void checkStatus(String name) {
-        onlineCheck(name);
+    public void checkLoop(String name) {
         if(isOnline){
             do{
                 onlineCheck(name);
@@ -64,6 +68,14 @@ public class StreamCheck {
             }while (isOnline);
         }else {
             System.out.println("offline");
+        }
+    }
+
+    public void checkStatus(String name){
+        onlineCheck(name);
+        if(isOnline){
+            main.changePane();
+            //checkLoop(name);
         }
     }
 
