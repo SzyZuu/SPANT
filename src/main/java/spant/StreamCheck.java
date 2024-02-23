@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.TimeUnit;
 
 public class StreamCheck {
     boolean isOnline = false;
@@ -65,6 +66,12 @@ public class StreamCheck {
                         e.printStackTrace();
                     }
                 }
+
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                }catch(InterruptedException e){
+                    e.printStackTrace();
+                }
             }while (isOnline);
         }else {
             System.out.println("offline");
@@ -75,7 +82,7 @@ public class StreamCheck {
         onlineCheck(name);
         if(isOnline){
             main.changePane();
-            //checkLoop(name);
+            checkLoop(name);
         }
     }
 
