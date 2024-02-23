@@ -18,12 +18,12 @@ public class Main {
     JPanel mainPanel;
 
     public Main() {
+        FlatDarkLaf.setup();
         cardLayout = new CardLayout();
         streamCheck = new StreamCheck(this);
         mainGUI = new MainGUI(this);
         spantGUI = new SpantGUI();
         window = new JFrame();
-        FlatDarkLaf.setup();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(450, 300);
         window.setResizable(false);

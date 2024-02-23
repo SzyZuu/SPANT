@@ -16,7 +16,6 @@ public class MainGUI extends JPanel {
         doGUI();
     }
     public void doGUI(){
-        FlatDarkLaf.setup();
         setBorder(new EmptyBorder(5, 5, 5, 5));
         setLayout(new GridLayout(2, 1, 0, 0));
 
