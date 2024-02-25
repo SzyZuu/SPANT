@@ -11,9 +11,11 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
-public class StreamCheck {
+public class StreamCheck implements Runnable {
+    Thread checkThread;
     boolean isOnline = false;
     private final String defaultURL = "https://twitch.tv/$c$";
+    private String streamerName;
     Main main;
 
     //System.out.println("Is online? " + getSource(name).contains("isLiveBroadcast"))
@@ -52,37 +54,14 @@ public class StreamCheck {
         }
     }
 
-    public void checkLoop(String name) {
-        if(isOnline){
-            do{
-                onlineCheck(name);
-                //System.out.println("Waiting...");
-                System.out.println(isOnline);
-                if(!isOnline){
-                    System.out.println("Streamer went offline, shutdown!");
-                    try {
-                        shutdown(1);
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-            }while (isOnline);
-        }else {
-            System.out.println("offline");
-        }
-    }
-
     public void checkStatus(String name){
         onlineCheck(name);
         if(isOnline){
+            streamerName = name;
             main.changePane();
-            checkLoop(name);
+
+            checkThread = new Thread(this);
+            checkThread.start();
         }
     }
 
@@ -105,5 +84,28 @@ public class StreamCheck {
         System.out.println(shutdownCommand);
         System.out.println("Shutting down NOW");
         Runtime.getRuntime().exec(shutdownCommand);
+    }
+
+    @Override
+    public void run() {
+        do{
+            onlineCheck(streamerName);
+            //System.out.println("Waiting...");
+            System.out.println(isOnline);
+            if(!isOnline){
+                System.out.println("Streamer went offline, shutdown!");
+                try {
+                    shutdown(1);
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+
+            try {
+                Thread.sleep(5000);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        }while (isOnline);
     }
 }
