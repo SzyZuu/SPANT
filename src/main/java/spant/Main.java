@@ -82,10 +82,18 @@ public class Main {
             return;
         }
 
+        Image trayIconPng;
+
+        try {
+            trayIconPng = ImageIO.read(Objects.requireNonNull(getClass().getResource("/sp16.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         final PopupMenu popUp = new PopupMenu();
 
         SystemTray tray = SystemTray.getSystemTray();
-        TrayIcon trayIcon = new TrayIcon(icon, "SPaNT");
+        TrayIcon trayIcon = new TrayIcon(trayIconPng, "SPaNT");
 
         MenuItem exitItem = new MenuItem("Exit SPaNT");
         popUp.add(exitItem);
