@@ -6,6 +6,7 @@ import spant.GUI.SpantGUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Main {
@@ -29,6 +30,7 @@ public class Main {
         window.setResizable(false);
         window.setLocationRelativeTo(null);
         window.setTitle("SPANT");
+        window.setIconImage(new ImageIcon(Objects.requireNonNull(getClass().getResource("/SPANT.png"))).getImage());
 
         mainPanel = new JPanel();
         mainPanel.setLayout(cardLayout);
